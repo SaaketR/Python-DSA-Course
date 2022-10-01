@@ -19,13 +19,19 @@ Terminology and Definitions:
     5. Big O Notation
         -> Worst-case complexity is expressed using Big O notation - O(N), O(log(N)), etc.
 
+    6. Sorted Array:
+        -> A array where all elements are arranged in ascending order (E.g.: [1, 2, 3, 4])
+    
+    7. Rotating Arrays:
+        -> The process of removing the last element of a sorted array and adding it before the first element of the array.
+        (E.g.: [0, 1, 2, 3, 4] yields [4, 3, 0, 1, 2] when rotated 2 times)
 
 Covered Algorithms:
 
     1. Linear Search
         -> Searching through a list in a linear fashion (element after element)
             i. Create a varible with 'position' 0
-            ii. Check if number at idex 'position' is equal to query 
+            ii. Check if number at index 'position' is equal to query 
             iii. If number matches, return 'position' as the answer to the question
             iv. If not, increment 'position' and repeat steps until we reach the end of the array
             v. If numer was not found, return -1
