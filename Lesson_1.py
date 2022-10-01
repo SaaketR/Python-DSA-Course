@@ -90,8 +90,12 @@ def binary_search_last(array, query):       # Iterative use of binary search to 
 input = [8, 8, 6, 6, 6, 6, 6, 3, 2, 2, 2, 0, 0, 0]
 query = 3
 output = binary_search_first(input, query)
+expected = 7
+
 print("Input: {}".format(input))
 print("Query: {}".format(query))
 print("Output: {}".format(output))
 
+if output != expected: print("~~~ FAIL - Output does not match Expected Output = {} ~~~".format(expected))
+else: print("~~~ PASS - Output matches Expected Output = {} ~~~".format(expected))
 
