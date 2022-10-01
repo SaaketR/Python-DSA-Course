@@ -36,8 +36,8 @@ Covered Algorithms:
         -> Pick random position, determine to which side of the random position is the query located.
             i. Find the middle element of the list
             ii. If this matches the query, return the middle element
-            iii. If the query is less than the middle element, search the first half of the list
-            iv. If the query is more than the middle element, search the second half of the list
+            iii. If the query is less than the middle element, repeat the search with first half of the list
+            iv. If the query is more than the middle element, repeat the search with second half of the list
             v. If no more elements, return -1
         -> Time Complexity = O(log(N))
         -> Space Complexity = O(1)
