@@ -34,10 +34,10 @@ def linear_search(array, query):
 # Binary Search Solution [Time = O(log(N)); Space = O(1)]
 
 def binary_search_general(array, query):      # General binary search algorithm
-    lo, hi = 0, len(array)-1
+    lo, hi = 0, len(array) - 1
     
     while lo <= hi:
-        mid = (lo+hi)//2
+        mid = (lo + hi) // 2
         mid_num = array[mid]
         if mid_num == query:
             return mid
@@ -48,5 +48,19 @@ def binary_search_general(array, query):      # General binary search algorithm
     
     return -1
 
-def binary_search_first(array, query):      # Recursive use of binary search to find the first known occurance of the query
+def binary_search_first(array, query):      # Iterative use of binary search to find the first known occurance of the query
+    lo, hi = 0, len(array) - 1
+    ans = -1
+
+    while lo <= hi:
+        mid = (lo+hi) // 2
+        mid_num = array[mid]
+        if mid_num == query:
+            ans = mid_num
+            hi = mid - 1
+        elif mid < query:
+            lo = mid + 1
+        elif mid > query:
+            hi = mid - 1
     
+    return ans
