@@ -1,14 +1,17 @@
 # Python-DSA-Course
 Data Structures and Algorithms Course from Jovian.ai
 
+Websites and resources referenced:
+    1. Jovian.ai
+    2. GeeksForGeeks.org
+
 Terminology and Definitions:
 
     1. Algorithms
         -> A list of statements that can be converted into code and executed by a computer on different sets of inputs.
 
     2. Complexity
-        -> Measures the amount of time and/or space required by tan algorithm for an output of a given size N. Refers to 
-        worst-case complexity.
+        -> Measures the amount of time and/or space required by tan algorithm for an output of a given size N. Refers to worst-case complexity.
     
     3. Time Complexity
         -> Depends on the number of operations performed in each iteration and the time taken to execute the statements.
@@ -19,12 +22,18 @@ Terminology and Definitions:
     5. Big O Notation
         -> Worst-case complexity is expressed using Big O notation - O(N), O(log(N)), etc.
 
-    6. Sorted Array:
+    6. Sorted Array
         -> A array where all elements are arranged in ascending order (E.g.: [1, 2, 3, 4])
     
-    7. Rotating Arrays:
+    7. Rotating Arrays
         -> The process of removing the last element of a sorted array and adding it before the first element of the array.
         (E.g.: [0, 1, 2, 3, 4] yields [4, 3, 0, 1, 2] when rotated 2 times)
+
+    8. Binary Search Trees
+        -> Binary tree where the left subtree contains nodes with keys lexicographically smaller than the node's key and the right subtree contains nodes with keys lexicographically greater than the node's key.
+    
+    9. Balanced Tree
+        -> A binary tree is said to be balanced if the left and right subtree of any node shouldn't differ in height or depth by more than 1.
 
 Covered Algorithms:
 
@@ -47,4 +56,19 @@ Covered Algorithms:
             v. If no more elements, return -1
         -> Time Complexity = O(log(N))
         -> Space Complexity = O(1)
+    
+    3. Inorder Traversal
+        -> Traverse the left subtree, visit the root, then traverse the right subtree.
+            -> node.left + [node.key] + node.right
+        -> Returns nodes of BSTs in non-decreasing order
+    
+    4. Preorder Traversal
+        -> Visit the root, traverse the left subtree, then traverse the right subtree.
+            -> [node.key] + node.left + node.right
+        -> Used to create a copy of the tree and also used to get the prefix expressions of an expression tree.
+    
+    5. Postoder Traversal
+        -> Traverse the left subtree, traverse the right subtree, then visit the root
+            -> node.left + node.right + [node.key]
+        -> Used to delete the tree and also used to get the postfix expressions of an expression tree.
     
