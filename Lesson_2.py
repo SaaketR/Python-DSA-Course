@@ -21,7 +21,12 @@ database. Below the methods are general operations performed on Binary Trees (li
 Though these operations are also used in the Binary Tree classes, I have written them separately to keep it organized and 
 clearly understandable with better detailed commenting.
 
-Note: I have not yet attempted the bonus leetcode problems below, but will do so after the course is completed.
+To do:
+    1. Complete the bonus Leetcode problems at the bottom of this script
+    2. Understand how self-balancing trees work, and build one using the Adelson-Velsky Landis approach
+    3. Attempt more Leetcode problems specific to binary trees (https://medium.com/techie-delight/binary-tree-interview-questions-and-practice-problems-439df7e5ea1f)
+        and (https://leetcode.com/tag/tree/).
+    4. Build a new script covering the extra practice.
 
 '''
 
