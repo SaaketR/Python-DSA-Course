@@ -19,6 +19,9 @@ Interpretation of the Question:
 
 # Building a framework for each user to store their username, name, and email:
 
+from curses import KEY_LEFT
+
+
 class User:
     def __init__(self, username, name, email):
         self.username = username
@@ -138,6 +141,93 @@ class BSTNode():
         self.key = key
         self.value = value
         self.left, self.parent, self.right = None, None, None
+    
+    def insert(self, key, value):       # Inserting a new node into the BST
+        if self is None:
+            self = BSTNode(key, value)
+        elif key < self.key:        # condition to add to the left
+            self.left = BSTNode.insert(self.left, key, value)
+            self.left.parent = self
+        elif key > self.key:        # condition to add to the right
+            self.right = BSTNode.insert(self.right, key, value)
+            self.right.parent = self
+        return self
+    
+    def find(self, key):        # Finding a particular tree in a BST
+        if self is None:
+            return None
+        elif self.key == key:
+            return self
+        elif self.key < key:        # condition to search in the right -> 'key' is greater than current key
+            return BSTNode.find(self.right, key)
+        elif self.key > key:        # condition to search in the left -> 'key' is lesser than current key
+            return BSTNode.find(self.left, key)
+    
+    def update(self, key, value):       # Updating values in a BST
+        if BSTNode.find(self, key) is not None:     # use the find() function above to locate the desired key, change the value
+            self.value = value
+
+    def list_all(self):     # List all the nodes in the BST
+        if self is None:
+            return []
+        return BSTNode.list_all(self.left) + [(self.key, self.value)] + BSTNode.list_all(self.right)
+    
+    def is_balanced(self):      # Check if a BST is balanced
+        if self is None:
+            return True, 0      # Node with None value is balanced and has a height of zero
+        
+        # check if the left and right subtrees are balanced and if the difference in heights is less than or equal to 1
+        balanced_l, height_l = BSTNode.is_balanced(self.left)
+        balanced_r, height_r = BSTNode.is_balanced(self.right)
+
+        balanced = (balanced_r and balanced_l) and (abs(height_l - height_r) <= 1)
+        height = 1 + max(height_l, height_r)
+
+        return balanced, height
+    
+    def make_balanced_bst(self, data, lo=0, hi=None, parent=None):      # Balancing a BST
+        if hi is None:
+            hi = len(data) - 1
+        if lo > hi:
+            return None
+        
+        mid = (lo + hi) // 2        # Obtaining the middle of the data
+        key, value = data[mid]
+
+        root = BSTNode(key, value)      # forming current root into a BST Node using the key and value found above
+        root.parent = parent        
+        root.left = BSTNode.make_balanced_bst(self, data=data, lo=lo, hi=mid-1, parent=root)        # repeating for the left subtree
+        root.right = BSTNode.make_balanced_bst(self, data=data, lo=mid+1, hi=hi, parent=root)       # repeating for the right subtree
+
+        return root
+    
+    def balance_bst(self):
+        return BSTNode.make_balanced_bst(self)
+    
+# Building a Tree Map (Binary Tree where nodes have both a key and a values)
+
+class TreeMap():
+    def __init__(self):
+        self.root = None
+    
+    def __setitem__(self, key, value):
+        node = BSTNode.find(self.root, key)
+        if not node:
+            self.root = BSTNode.insert(self.root, key, value)
+            self.root = BSTNode.balance_bst(self.root)
+        else:
+            BSTNode.update(self.root, key, value)
+    
+    def __getitem__(self, key):
+        node = BSTNode.find(self.root, key)
+        return node.value if node else None
+    
+    def __iter__(self):
+        return (x for x in BSTNode.list_all(self.root))
+    
+    def __len__(self):
+        return TreeNode.size(self.root)
+
 
 '''
 Binary Tree Operations:
