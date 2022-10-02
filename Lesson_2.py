@@ -15,12 +15,17 @@ Interpretation of the Question:
     Create a data structure to store the profile information of 100 million users and be able to insert, find, update, and 
     list all the users/user information on the platform. All usernames are unique.
 
+Methods User and UserDatabase, although working and correct, are inefficient methods to tackle the problem. This is because
+they have a linear Time Complexity. This is improved upon in the succeeding methods that use Binary Search Trees to build the
+database. Below the methods are general operations performed on Binary Trees (like parsing, tree traversal, and heights).
+Though these operations are also used in the Binary Tree classes, I have written them separately to keep it organized and 
+clearly understandable with better detailed commenting.
+
+Note: I have not yet attempted the bonus leetcode problems below, but will do so after the course is completed.
+
 '''
 
 # Building a framework for each user to store their username, name, and email:
-
-from curses import KEY_LEFT
-
 
 class User:
     def __init__(self, username, name, email):
@@ -204,7 +209,7 @@ class BSTNode():
     def balance_bst(self):
         return BSTNode.make_balanced_bst(self)
     
-# Building a Tree Map (Binary Tree where nodes have both a key and a values)
+# Building a Tree Map (Binary Tree where nodes have both a key and a value)
 
 class TreeMap():
     def __init__(self):
@@ -231,18 +236,20 @@ class TreeMap():
 
 '''
 Binary Tree Operations:
+
     i.      Parsing a Tree Tuple    = converting tuple into a binary tree
     ii.     tree_to_tuple           = converting a binary tree into a tree tuple
     iii.    In-Order Traversal      = node.left, node.key, node.right
     iv.     Pre-Order Traversal     = node.key, node.left, node.right
     v.      Post-Order Traversal    = node.left, node.right, node.key
     vi.     Height/Depth of Tree    = length of longest path from root node to leaf
-    vi.     Size of Binary Tree     = number of nodes in a binary tree
-    vii.    Check if Binary Tree is a Binary Search Tree and return minimum and maximum key values 
+    vii.    Size of Binary Tree     = number of nodes in a binary tree
+    viii.   Check if Binary Tree is a Binary Search Tree and return minimum and maximum key values 
+    
     (bonus leetcode problems)
-    vii.    Maximum depth of Tree
-    viii.   Minimum depth of Tree
-    ix.     Diamater of Binary Tree
+    ix.     Maximum depth of Tree
+    x.      Minimum depth of Tree
+    xi.     Diamater of Binary Tree
 '''
 
 def parse_tuple(data):      # Converting a Tree Tuple into a Binary Tree
@@ -256,8 +263,10 @@ def parse_tuple(data):      # Converting a Tree Tuple into a Binary Tree
         node = TreeNode(data)
     return node
 
-def tree_to_tuple(tree):        # Converting a Binary Tree into a Tree Tuple
-    pass
+def tree_to_tuple(node):        # Converting a Binary Tree into a Tree Tuple
+    if node is None:
+        return None
+    return tree_to_tuple(node.left), node.key, tree_to_tuple(node.right)
 
 def InOrder_traversal(node):        # In Order Traversal of a Binary Tree
     if node is None:
@@ -302,4 +311,12 @@ def is_bst(node):       # Checking if BT is a BST and returning Minimum and Maxi
     max_key = max(remove_none([max_l, node.key, max_r]))        # Evaluating the maximum key on left sub-tree, node, and right sub-tree
 
     return is_bst_node, min_key, max_key
-    
+
+def max_depth(node):
+    pass
+
+def min_depth(node):
+    pass
+
+def tree_diameter(node):
+    pass
