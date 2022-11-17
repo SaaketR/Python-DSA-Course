@@ -101,20 +101,20 @@ def get_valid_index(data_list, key):        # function to iterate to the subsequ
 
 class HashTable_v2:
     def __init__(self, max_size = MAX_HASH_TABLE_SIZE):
-        self.data_list = [None] * max_size
+        self.data_list = [None] * max_size          # creating an (data) list of maximum size with None values
     
     def insert(self, key, value):
-        idx = get_valid_index(self.data_list, key)
-        self.data_list[idx] = key, value
+        idx = get_valid_index(self.data_list, key)      # finding the available index, given the possibility of collision
+        self.data_list[idx] = key, value        # inserting a key-value pair at the found index
 
     def find(self, key):
-        idx = get_valid_index(self.data_list, key)
-        kv = self.data_list[idx]
-        return None if kv is None else kv[1]
+        idx = get_valid_index(self.data_list, key)      # finding the available index
+        kv = self.data_list[idx]        # obtaining the key-value pair at the required index
+        return None if kv is None else kv[1]        # returning the value (None, if key-value pair is of None type)
 
     def update(self, key, value):
-        idx = get_valid_index(self.data_list, key)
-        self.data_list[idx] = key, value
+        idx = get_valid_index(self.data_list, key)          # finding the available index
+        self.data_list[idx] = key, value        # replacing the key-value pair at the index with a new (updated) key-value pair
 
     def list_all(self):
-        return [kv[0] for kv in self.data_list if kv is not None]
+        return [kv[0] for kv in self.data_list if kv is not None]       # returning the keys of the data list at all indices
