@@ -32,6 +32,11 @@ Hashing Function:
         3. Sum the resulting numbers to obtain the hash for the string
         4. Return the remainder of the above sum with the size of the data_list 
 
+Linear Probing:
+    - Technique used by the Hash Table to deal with two different keys having the same hash number (e.g.: "listen" and "silent").
+    - When inserting new key-value pair, if the target index is occupied by another key, iterate to the following indices until 
+    an empty index is found, at which point insert the pair.
+    - For finding and updating, repeat the same, except iterate until the target key matches the key at the index.
 '''
 
 MAX_HASH_TABLE_SIZE = 4096      # maximum size of the hash table
@@ -48,16 +53,16 @@ def get_index(data_list, string):
 
 
 
-
-class HashTable:
+# Basic version of a Hash Table; does not handle collisions or keys with the same hash
+class HashTable_v1:
     def __init__(self, max_size=MAX_HASH_TABLE_SIZE):
         self.data_list = [None] * max_size
 
-    def insert(self, key, value):
+    def insert(self, key, value):       # inserting new value given a key
         idx = get_index(self.data_list, key)
         self.data_list[idx] = (key, value)
 
-    def find(self, key):
+    def find(self, key):        # finding the value corresponding to a key
         idx = get_index(self.data_list, key)
         kv = self.data_list[idx]        # returns the key-value pair
         
@@ -67,9 +72,49 @@ class HashTable:
             key, value = kv
             return value
 
-    def update(self, key, value):
+    def update(self, key, value):       # updating the value at a key
         idx = get_index(self.data_list, key)
         self.data_list[idx] = (key, value)      # storing a tuple since data_list stores a key-value pair
+
+    def list_all(self):         # listing all the keys in the data list
+        return [kv[0] for kv in self.data_list if kv is not None]
+
+
+# Using "Linear Probing" to handle collisions 
+
+def get_valid_index(data_list, key):        # function to iterate to the subsequent index in case of collision
+    idx = get_index(data_list, key)
+
+    while True:
+        kv = data_list[idx]
+        if (kv == None):        # condition for the insert function (return index if next key is None)
+            return idx
+        
+        k, v = kv
+        if k == key:        # condition for the find/update functions (return index when the keys match)
+            return idx
+        
+        idx += 1
+
+        if (idx == len(data_list)):         # if no matches, loop from the beginning of the data list
+            idx = 0
+
+class HashTable_v2:
+    def __init__(self, max_size = MAX_HASH_TABLE_SIZE):
+        self.data_list = [None] * max_size
+    
+    def insert(self, key, value):
+        idx = get_valid_index(self.data_list, key)
+        self.data_list[idx] = key, value
+
+    def find(self, key):
+        idx = get_valid_index(self.data_list, key)
+        kv = self.data_list[idx]
+        return None if kv is None else kv[1]
+
+    def update(self, key, value):
+        idx = get_valid_index(self.data_list, key)
+        self.data_list[idx] = key, value
 
     def list_all(self):
         return [kv[0] for kv in self.data_list if kv is not None]
