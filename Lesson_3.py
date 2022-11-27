@@ -31,6 +31,17 @@ Insertion Sort Algorithm (source: https://www.geeksforgeeks.org/insertion-sort/)
     3. If the key element is greater (or smaller, in case of ascending order), swap the two elements, and repeat until the key is 
     at the correct position
     4. Repeat, until the array is sorted
+
+Divide and Conquer:
+    1. Divide array into two equal parts
+    2. Recursively solve the problem for each of the two parts
+    3. Combine the results to solve the problem
+    4. Inlcude terminating conditions for small and indivisible inputs
+
+Merge Sort (Divide and Conquer):
+    1. Find the middle index and divide the array into its left half and right half (until the lengths are atomically divisible)
+    2. Perform the merge sort for the left half and right half respectively
+    3. Merge the sorted arrays by comparing the elements in the left and right half and placing them the appropriate order
 '''
 
 # Bubble Sort, descending order [Time = O(N^2); Space = O(N)]
@@ -67,10 +78,46 @@ def insertion_sort(array):
         i += 1
     return arr
 
+# Merge Sort, ascending order [Time = O(N log(N)); Space = O(N)]
+
+def merge_sort(array):
+    if (len(array) <= 1):       # Condition for when the input is empty or contains just one element
+        return array
+
+    sorted = []     # Creating a separate array for the sorted result to avoid directly altering the input array
+    
+    # Declaring the middle index, hence dividing the array into its left and right halves
+    mid = len(array) // 2
+    L, R = array[:mid], array[mid:]
+
+    # Performing the merge sort function on the left and right halves respectively
+    L, R = merge_sort(L), merge_sort(R)
+    
+    # Perfoming the Merging function
+    i, j = 0, 0
+    while (i < len(L) and j < len(R)):      # Iterating through the halves, comparing their elements, and placing them in the appropriate order
+        if (L[i] <= R[j]):
+            sorted.append(L[i])
+            i += 1
+        else:
+            sorted.append(R[j])
+            j += 1
+    
+    # Identifying any element that may have been left out during the Merging function
+    while (i < len(L)):
+        sorted.append(L[i])
+        i += 1
+    
+    while (j < len(R)):
+        sorted.append(R[j])
+        j += 1
+    
+    return sorted
+
 # Testing
 
-input = [4, 2, 6, 3, 4, 6, 2, 1]
-output = insertion_sort(input)
+input = [99, 10, 9, 8, 6, 5, 3]
+output = merge_sort(input)
 
 
 print("Input: {}".format(input))
