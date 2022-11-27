@@ -38,10 +38,13 @@ Divide and Conquer:
     3. Combine the results to solve the problem
     4. Inlcude terminating conditions for small and indivisible inputs
 
-Merge Sort (Divide and Conquer):
+Merge Sort (Divide and Conquer): (reference: https://www.geeksforgeeks.org/merge-sort/)
     1. Find the middle index and divide the array into its left half and right half (until the lengths are atomically divisible)
     2. Perform the merge sort for the left half and right half respectively
     3. Merge the sorted arrays by comparing the elements in the left and right half and placing them the appropriate order
+    - Slower for smaller arrays
+    - Undergoes the entire sorting process even if the array is sorted
+    - Creates a temporary array during the merging process, leads to space inefficiencies.
 '''
 
 # Bubble Sort, descending order [Time = O(N^2); Space = O(N)]
@@ -85,7 +88,7 @@ def merge_sort(array):
         return array
 
     sorted = []     # Creating a separate array for the sorted result to avoid directly altering the input array
-    
+
     # Declaring the middle index, hence dividing the array into its left and right halves
     mid = len(array) // 2
     L, R = array[:mid], array[mid:]
