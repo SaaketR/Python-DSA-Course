@@ -45,6 +45,13 @@ Merge Sort (Divide and Conquer): (reference: https://www.geeksforgeeks.org/merge
     - Slower for smaller arrays
     - Undergoes the entire sorting process even if the array is sorted
     - Creates a temporary array during the merging process, leads to space inefficiencies.
+
+Quick Sort:
+    1. Pick a random element ("Pivot" element), usually the first element or the last element
+    2. Identify the left and right pointers in the array which will be compared against the pivot element
+    3. Use the left and right pointers to rearrange the array such all elements smaller than the pivot are placed to the left of the pivot,
+       while all elements greater than the pivot are placed to the right of the pivot ("Partitions")
+    4. Repeat this process of pivoting and partioning
 '''
 
 # Bubble Sort, descending order [Time = O(N^2); Space = O(N)]
@@ -117,10 +124,48 @@ def merge_sort(array):
     
     return sorted
 
+# Quick Sort, ascending order [Time = O(N^2); Space = O(1)]
+
+def quick_sort(array, start=0, end=None):
+    if end is None:
+        array = list(array)
+        end = len(array) - 1
+    
+    if (start < end):
+        pivot = partition(array, start, end)      # returns the pivot position and arranges the array according to the pivot (small to left, large to the right)
+        quick_sort(array, start, pivot-1)
+        quick_sort(array, pivot+1, end)
+    
+    return array
+
+
+def partition(array, start=0, end=None):
+    if end is None:
+        end = len(array) - 1
+    
+    left_pointer, right_pointer = start, end-1
+
+    # arranging the elements in the array relative to the pivot element
+    while (right_pointer > left_pointer):
+        if array[left_pointer] < array[end]:
+            left_pointer += 1
+        elif array[right_pointer] > array[end]:
+            right_pointer -= 1
+        else:
+            array[left_pointer], array[right_pointer] = array[right_pointer], array[left_pointer]
+
+    # placing the pivot element in the appropriate position
+    if (array[left_pointer] > array[end]):
+        array[left_pointer], array[end] = array[end], array[left_pointer]
+        return 1
+    else:
+        return end
+    
+
 # Testing
 
 input = [99, 10, 9, 8, 6, 5, 3]
-output = merge_sort(input)
+output = quick_sort(input)
 
 
 print("Input: {}".format(input))
