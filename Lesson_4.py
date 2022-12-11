@@ -19,6 +19,10 @@ Test Cases:
     Given n elements, each of which has a weight and a value, determine the maximum values that can be obtained by 
     selecting a subset of the elements weighing no more than total_weight.
 
+References:
+    1. LCS with Memoization - https://www.geeksforgeeks.org/longest-common-subsequence-dp-using-memoization/
+    2. 0-1 Knapsack Problem: https://www.youtube.com/watch?v=8LusJS5-AGo
+
 '''
 
 # Recursive Solution to Longest Common Subsequence problem [Time = O(2^N) ; Space = O(N)]
